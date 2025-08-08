@@ -74,7 +74,35 @@ public class LoopDemo {
 
     }
 
+    //문자열 반복
     public void popStr(String str) {
+        System.out.println(">>>>>> params = "+str);
+        for(int idx = 0; idx <str.length() ; idx++) {
+            
+            System.out.print(str.charAt(idx)+"\t");
+        }
+    }
 
+    // 중첩 반복문
+    public void gugudanTable() {
+        for (int dan = 1; dan <=9 ; dan++) {
+            // if (dan ==5) {
+            //     continue; // 이 조건만 skip
+            // }
+            for (int col = 2 ; col <=9 ; col++) {
+                // if (col == 5){
+                //     continue;
+                // }
+                System.out.printf("%d * %d = %d\t", col, dan, (dan*col));
+                if (col == 5){
+                    break;
+                }
+            }
+            // if (dan == 5){
+            //     break;
+            // }
+
+            System.out.println(); // 개행
+        }
     }
 }

@@ -10,5 +10,12 @@ public class LoopApp {
 
         System.out.println();
         app.loopBreak(100);
+
+        System.out.println();
+        app.popStr("jslim");
+
+        System.out.println();
+        System.out.println();
+        app.gugudanTable();
     }
 }

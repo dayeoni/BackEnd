@@ -69,7 +69,34 @@ public class LoopDemo {
             sum += idx;
             //System.out.printf("sum = %d\n", sum);
         }
-        System.out.printf("idx = %d, sum = %d\n", (idx-1), sum);
+        // %d : 정수, %f : 실수, %s : 문자열
+        System.out.printf("idx = %d, sum = %d", (idx-1), sum);
 
+    }
+
+    //문자열 반복
+    public void popStr(String str) {
+        System.out.println(">>>>>> params = "+str);
+        for(int idx = 0; idx <str.length() ; idx++) {
+            
+            System.out.print(str.charAt(idx)+"\t");
+        }
+    }
+
+    // 중첩 반복문
+    public void gugudanTable() {
+        for (int dan = 1; dan <=9 ; dan++) {
+            // if (dan ==5) {
+            //     continue; // 이 조건만 skip
+            // }
+            for (int col = 2 ; col <=9 ; col++) {
+                System.out.printf("%d * %d = %d\t", col, dan, (dan*col));
+            }
+            // if (dan == 5){
+            //     break;
+            // }
+
+            System.out.println(); // 개행
+        }
     }
 }

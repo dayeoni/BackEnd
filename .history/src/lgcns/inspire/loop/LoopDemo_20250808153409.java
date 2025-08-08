@@ -73,4 +73,22 @@ public class LoopDemo {
         System.out.printf("idx = %d, sum = %d", (idx-1), sum);
 
     }
+
+    //문자열 반복
+    public void popStr(String str) {
+        System.out.println(">>>>>> params = "+str);
+        for(int idx = 0; idx <str.length() ; idx++) {
+            
+            System.out.print(str.charAt(idx)+"\t");
+        }
+    }
+
+    // 중첩 반복문
+    public void gugudanTable() {
+        for (int dan = 2; dan <=9 ; dan++) {
+            for (int col = 1 ; col <=9 ; col++) {
+                System.out.printf("%d * %d = %d\t", dan, col, (dan*col));
+            }
+        }
+    }
 }

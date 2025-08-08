@@ -96,13 +96,10 @@ public class LoopDemo {
                 // if (col == 5){
                 //     continue;
                 // }
-
-                // 4단까지 출력하고 빠져나가려면?
-                if (dan ==5) {
+                System.out.printf("%d * %d = %d\t", col, dan, (dan*col));
+                if (col==5 && dan ==3) {
                     break outer;
                 }
-                System.out.printf("%d * %d = %d\t", col, dan, (dan*col));
-                
                 // if (col == 5){
                 //     break;
                 // }

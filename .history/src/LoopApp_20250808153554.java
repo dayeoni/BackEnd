@@ -15,7 +15,6 @@ public class LoopApp {
         app.popStr("jslim");
 
         System.out.println();
-        System.out.println();
         app.gugudanTable();
     }
 }

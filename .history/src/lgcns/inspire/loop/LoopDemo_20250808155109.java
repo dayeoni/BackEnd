@@ -86,27 +86,18 @@ public class LoopDemo {
     // 중첩 반복문
     // 5단에서 3곱하면 완전하게 루프를 빠져나가고 싶다면?
     public void gugudanTable() {
-        outer : 
         for (int dan = 1; dan <=9 ; dan++) {
             // if (dan ==5) {
             //     continue; // 이 조건만 skip
             // }
-            
             for (int col = 2 ; col <=9 ; col++) {
                 // if (col == 5){
                 //     continue;
                 // }
-
-                // 4단까지 출력하고 빠져나가려면?
-                if (dan ==5) {
-                    break outer;
-                }
                 System.out.printf("%d * %d = %d\t", col, dan, (dan*col));
-                
                 // if (col == 5){
                 //     break;
                 // }
-                
             }
             // if (dan == 5){
             //     break;
