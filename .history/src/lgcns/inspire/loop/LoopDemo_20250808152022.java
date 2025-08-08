@@ -39,7 +39,42 @@ public class LoopDemo {
 
     // 1~100 사이의 난수를 발생시켜서 해당 난수의 합을 구한다면?
     public void sumRandom() {
+        int nan = (int)(Math.random() * 100) +1 ; //int형으로 변경
+        System.out.println(nan);
         
+        int idx = 0;
+        int sum = 0;
+        while(idx <= nan) {
+            sum += nan;
+            idx++;
+        }
+        System.out.printf("발생된 난수의 합은 : %d", sum);
     }
 
+    //break
+    /*
+    입력값 number = 100;
+    매개변수로 입력받은 값을 1 ~ 차례로 누적하여 합을 구하다가
+    입력받은 값을 넘으면 중단하고
+    마지막으로 더해진 값과 그때까지의 합을 출력
+    */
+    public void loopBreak(int number){
+        int sum = 0, idx = 0;
+        for (idx =1 ; idx<=number; idx++){
+            //System.out.printf("idx= %d\n", idx);
+            if(sum > number) {
+                break;
+            }
+
+            sum += idx;
+            //System.out.printf("sum = %d\n", sum);
+        }
+        // %d : 정수, %f : 실수, %s : 문자열
+        System.out.printf("idx = %d, sum = %d", (idx-1), sum);
+
+    }
+
+    public void popStr() {
+        
+    }
 }

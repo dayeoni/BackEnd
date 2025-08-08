@@ -69,16 +69,7 @@ public class LoopDemo {
             sum += idx;
             //System.out.printf("sum = %d\n", sum);
         }
-        // %d : 정수, %f : 실수, %s : 문자열
-        System.out.printf("idx = %d, sum = %d", (idx-1), sum);
+        System.out.printf("idx = %d, sum = %d\n", (idx-1), sum);
 
-    }
-
-    public void popStr(String str) {
-        System.out.println(">>>>>> params = "+str);
-        for(int idx = 0; idx <str.length() ; idx++) {
-            
-            System.out.print(str.charAt(idx)+"\t");
-        }
     }
 }

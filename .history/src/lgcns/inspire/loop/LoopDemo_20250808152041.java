@@ -75,10 +75,6 @@ public class LoopDemo {
     }
 
     public void popStr(String str) {
-        System.out.println(">>>>>> params = "+str);
-        for(int idx = 0; idx <str.length() ; idx++) {
-            
-            System.out.print(str.charAt(idx)+"\t");
-        }
+
     }
 }

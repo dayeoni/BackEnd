@@ -78,7 +78,6 @@ public class LoopDemo {
         System.out.println(">>>>>> params = "+str);
         for(int idx = 0; idx <str.length() ; idx++) {
             
-            System.out.print(str.charAt(idx)+"\t");
         }
     }
 }
