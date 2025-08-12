@@ -71,7 +71,7 @@ public class InheritanceApp {
                 System.out.println(per.perInfo());
             }
         } 
-        
-
     }
+
+    
 }
