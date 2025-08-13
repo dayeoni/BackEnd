@@ -18,9 +18,4 @@ public class PersonDTO {
         return "PersonDTO name=" + name + ", age=" + age + ", address=" + address;
     }
 
-    
-    
-    
-
-
 }
