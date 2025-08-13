@@ -90,5 +90,9 @@ public class CollectionApp {
         map.put("stu", stuList);
         map.put("tea", teaList);
 
+        List<? extends PersonDTO> perTeaList = map.get("tea");
+        for (PersonDTO per : perTeaList) {
+            System.out.println(per.perInfo());
+        }
     }
 }
