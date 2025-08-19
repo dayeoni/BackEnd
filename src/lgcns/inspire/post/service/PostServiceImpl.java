@@ -2,6 +2,7 @@ package lgcns.inspire.post.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import lgcns.inspire.post.domain.dto.PostRequestDTO;
 import lgcns.inspire.post.domain.dto.PostResponseDTO;
@@ -40,6 +41,41 @@ public class PostServiceImpl implements PostService {
     public int insertService(PostRequestDTO request) {
         System.out.println(">>>> post service insertService : params request "+request); 
         return dao.insertRow(request) ;
+    }
+
+    /*
+    Quiz
+    - 전체 글 목록을 가지고와서
+    - 작성자에 해당하는 게시글만 필터링하고
+    - 만약, 작성자에 해당하는 게시글이 존재하지 않는다면
+    - case01) 비어있는 리스트로 반환
+    - case02) Optional로 감싸서 반환
+    - 두 가지 케이스 중 하나를 선택해서 반환한다.
+    */
+
+    //// case 01
+    // @Override
+    // public List<PostResponseDTO> searchService(String writer) {
+    //     System.out.println(">>>> post service searchService : params request "+writer); 
+    //     List<PostResponseDTO> list = dao.selectRow();
+    //     // db: groupBy(), partitioningBy()
+    //     return list.stream()
+    //         .filter(post -> post.getWriter().equals(writer))
+    //         .collect(Collectors.toList());  
+        
+    // }
+
+    //// case 02
+    @Override
+    public Optional<List<PostResponseDTO>> searchService(String writer) {
+        System.out.println(">>>> post service searchService : params request "+writer); 
+        List<PostResponseDTO> list = dao.selectRow();
+        // db: groupBy(), partitioningBy()
+        List<PostResponseDTO> result =  list.stream()
+                                            .filter(post -> post.getWriter().equals(writer))
+                                            .collect(Collectors.toList());  
+                                            
+        return result.isEmpty() ? Optional.empty() : Optional.of(result);                                    
     }
 
     

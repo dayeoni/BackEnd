@@ -6,17 +6,23 @@ import java.util.Scanner;
 
 import lgcns.inspire.post.ctrl.PostController;
 import lgcns.inspire.post.domain.dto.PostResponseDTO;
+import lgcns.inspire.post.front.FrontController;
 
 public class PostView {
     
     private Scanner scan;
     
     // Dependency Injection (DI)
-    private PostController ctrl;
+    // private PostController ctrl;
+
+    private FrontController front;
+
     
     public PostView(){
         scan = new Scanner(System.in);
-        ctrl = new PostController();
+        //ctrl = new PostController();
+
+        front = new FrontController();
     }
 
 
@@ -28,6 +34,7 @@ public class PostView {
             System.out.println("3. 입력 폼으로 이동");
             System.out.println("4. 수정 페이지 이동");
             System.out.println("5. 삭제하기");
+            System.out.println("6. 게시글 작성자로 검색");
             System.out.println("99. 프로그램 종료");
             System.out.print("번호를 선택하세요 : ");
             int number = Integer.parseInt(scan.nextLine());
@@ -40,6 +47,15 @@ public class PostView {
                     break;
                 case 3:
                     insert();
+                    break;
+                case 4:
+                    update();
+                    break;
+                case 5:
+                    delete();
+                    break;
+                case 6:
+                    search();
                     break;
                 case 99:
                     System.out.println("포스트 앱 수행을 종료합니다.");
@@ -59,7 +75,7 @@ public class PostView {
         System.out.println();
         System.out.println(">>> 데이터 출력 <<<");
 
-        List<PostResponseDTO> list = ctrl.list();
+        List<PostResponseDTO> list = front.list("list");
         System.out.println("view list data : "+list);
         
         // 1.8 version
@@ -83,7 +99,7 @@ public class PostView {
         
         System.out.println(">>> 게시물 번호 입력 : ");
         int id = Integer.parseInt(scan.nextLine());
-        Optional<PostResponseDTO> result = ctrl.findPost(id);
+        Optional<PostResponseDTO> result = front.findPost("find", id);
         if (result.isPresent()) {
             System.out.println(result.get());
         } else {
@@ -116,11 +132,65 @@ public class PostView {
         - 성공이면 1, 실패면 2 반환
         */
         //System.out.println("[debug] >>> "+title+"\t"+content+"\t"+writer);
-        int successFlag = ctrl.insert(title, content, writer);
+        int successFlag = front.insert("insert",title, content, writer);
         if(successFlag == 1) {
-            System.out.println("압력성공");
+            System.out.println("입력성공");
         } else {
             System.out.println("입력실패");
         }
     }
+
+
+    public void delete() {
+        System.out.println();
+        System.out.println(">>>> post id <<<<");
+
+        System.out.println(">>> 삭제할 게시글의 아이디를 입력하세요 : ");
+        int id = Integer.parseInt(scan.nextLine());
+
+        int deleteFlag = front.delete("delete", id);
+        System.out.println((deleteFlag == 1) ? "삭제 완료" : "삭제 실패");
+    } 
+
+
+    /* 
+    Quiz
+    - 수정폼으로부터 title, content, id 입력받고 싶다
+    - 입력받은 데이터를 front.update("update", title, content, id) 전달
+    - front ctrl 쪽에서는 factory의 도움을 받아서 PostUpdateCtrl 객체 반환받고
+    - 해당 객체의 update(title, content, id) 전달해서 수행여부로 int형 값을 반환
+    */
+    public void update(){
+        System.out.println();
+        System.out.println(">>>> post update title, content, id <<<<");
+
+        System.out.print(">>> 제목 : ");
+        String title = scan.nextLine();  
+        System.out.println();
+        System.out.print(">>> 내용 : ");
+        String content = scan.nextLine(); 
+        System.out.println();
+        System.out.print(">>> 게시글 번호 : ");
+        int id = Integer.parseInt(scan.nextLine()); 
+
+        int updateFlag = front.update("update", title, content, id);
+        System.out.println((updateFlag == 1) ? "수정 완료" : "수정 실패");
+
+    }
+
+    
+    public void search(){
+        System.out.println();
+        System.out.println(">>>> post search writer <<<<");
+
+        System.out.println(">>> 작성자 입력 : ");
+        String writer = scan.nextLine();
+
+        Optional<List<PostResponseDTO>> list = front.search("search", writer);
+        list.ifPresentOrElse(
+            lst -> lst.forEach(System.out::println), 
+            ()-> System.out.println(writer+"님이 작성한 게시글이 존재하지 않습니다"));
+    }
+
+
 }

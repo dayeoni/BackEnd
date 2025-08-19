@@ -26,15 +26,23 @@ public class PostDAO {
             PostResponseDTO.builder()
                             .id(1)
                             .title("mvc")
-                            .content("springboot").build(),
+                            .content("springboot")
+                            .writer("jslim").build(),
             PostResponseDTO.builder()
                             .id(2)
                             .title("stream api")
-                            .content("기초문법").build(),
+                            .content("기초문법")
+                            .writer("jslim").build(),
             PostResponseDTO.builder()
                             .id(3)
                             .title("lambda")
-                            .content("함수형 인터페이스와 연동").build()
+                            .content("함수형 인터페이스와 연동")
+                            .writer("lgcns").build(),
+            PostResponseDTO.builder()
+                            .id(4)
+                            .title("springboot")
+                            .content("pattern 조합")
+                            .writer("inspire").build()               
         ));
     }
     
