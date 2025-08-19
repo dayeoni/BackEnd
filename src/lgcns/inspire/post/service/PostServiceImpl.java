@@ -1,6 +1,9 @@
 package lgcns.inspire.post.service;
 
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -43,40 +46,71 @@ public class PostServiceImpl implements PostService {
         return dao.insertRow(request) ;
     }
 
-    /*
-    Quiz
-    - 전체 글 목록을 가지고와서
-    - 작성자에 해당하는 게시글만 필터링하고
+    /* 
+    Quiz)
+    - 전체 글 목록을 가져고와서
+    - 작성자에 해당하는 게시글만 필터링하고 
     - 만약, 작성자에 해당하는 게시글이 존재하지 않는다면
     - case01) 비어있는 리스트로 반환
-    - case02) Optional로 감싸서 반환
-    - 두 가지 케이스 중 하나를 선택해서 반환한다.
+    - case02) Optional 로 감싸서 반환 
+    - 두 가지 케이스 중 하나를 선택해서 반환한다.  
     */
-
-    //// case 01
     // @Override
     // public List<PostResponseDTO> searchService(String writer) {
-    //     System.out.println(">>>> post service searchService : params request "+writer); 
-    //     List<PostResponseDTO> list = dao.selectRow();
-    //     // db: groupBy(), partitioningBy()
+    //     System.out.println(">>>> post service searchService : params writer "+writer);
+    //     List<PostResponseDTO> list = dao.selectRow() ;
+    //     // db : groupBy(), partitioningBy()
     //     return list.stream()
-    //         .filter(post -> post.getWriter().equals(writer))
-    //         .collect(Collectors.toList());  
-        
+    //                 .filter(post -> post.getWriter().equals(writer))
+    //                 .collect(Collectors.toList()) ; 
     // }
 
-    //// case 02
     @Override
     public Optional<List<PostResponseDTO>> searchService(String writer) {
-        System.out.println(">>>> post service searchService : params request "+writer); 
-        List<PostResponseDTO> list = dao.selectRow();
-        // db: groupBy(), partitioningBy()
+        System.out.println(">>>> post service searchService : params writer "+writer);
+        List<PostResponseDTO> list = dao.selectRow() ;
+        // db : groupBy(), partitioningBy()
         List<PostResponseDTO> result =  list.stream()
-                                            .filter(post -> post.getWriter().equals(writer))
-                                            .collect(Collectors.toList());  
-                                            
-        return result.isEmpty() ? Optional.empty() : Optional.of(result);                                    
+                                        .filter(post -> post.getWriter().equals(writer))
+                                        .collect(Collectors.toList()) ; 
+
+        return result.isEmpty() ? Optional.empty() : Optional.of(result); 
     }
+
+    @Override
+    public int deleteService(Map<String, Integer> map) {
+        System.out.println(">>>> post service deleteService : params id "+map.get("key")); 
+        return dao.deleteRow(map) ; 
+    }
+
+    @Override
+    public int updateService(PostRequestDTO request) {
+        System.out.println(">>>> post service updateService : params request "+request);  
+        return dao.updateRow(request) ;
+    }
+
+    @Override
+    public List<PostResponseDTO> loadToFile() {
+        System.out.println(">>>> post service loadToFile ");  
+        return null ; 
+    }
+
+    @Override
+    public boolean saveToFile() {
+        System.out.println(">>>> post service saveToFile");
+        boolean flag = false ;
+        List<PostResponseDTO> list = dao.selectRow();
+        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("c:\\inspire\\be\\inspire-java\\test.txt"))) {
+            oos.writeObject(list);  
+            System.out.println(">>> 직렬화된 객체 파일에 저장 완료!!");
+            flag = true ; 
+        } catch(Exception e) {
+            e.printStackTrace();
+            return flag ;
+        }
+        return flag ; 
+    }
+
 
     
 }

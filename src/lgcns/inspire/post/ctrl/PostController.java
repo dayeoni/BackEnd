@@ -22,7 +22,7 @@ public class PostController {
 
     public Optional<PostResponseDTO> findPost(int id) {
         System.out.println(">>>> post ctrl findPost : params "+id);
-        return service.selectSerivce(id) ;
+        return service.selectService(id) ;
     }
 
     public int insert(String title, String content, String writer) { 
